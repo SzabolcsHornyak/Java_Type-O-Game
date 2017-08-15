@@ -1,11 +1,13 @@
 package com.jarheads;
 
+import org.json.simple.JSONArray;
+
 import java.util.Scanner;
 import java.util.LinkedList;
 import java.util.Random;
 
 public class NewGame {
-    public static void new_game() {
+    public static void new_game(JSONArray words) {
         // same thing but instead of exit, break the while loop
 
 
@@ -13,24 +15,16 @@ public class NewGame {
         String randomWord;
         Integer userScore = 0;
 
-        LinkedList<String> testWords = new LinkedList<String>();
-        testWords.add("asd");
-        testWords.add("sdf");
-        testWords.add("dfg");
-        testWords.add("fgh");
-        testWords.add("ghj");
 
-        System.out.println("New");
+        for (int i = 0; i < words.size(); i++) {
 
-        for (int i = 0; i < testWords.size(); i++) {
-
-            int randomNumber = (int) (Math.random() * testWords.size());
-            randomWord = testWords.get(randomNumber);
+            int randomNumber = (int) (Math.random() * words.size());
+            randomWord = words.get(randomNumber).toString();
             System.out.println(randomWord);
-            testWords.remove(randomNumber);
+            words.remove(randomNumber);
             String enteredWord = userInput.next();
             if (enteredWord.equals(randomWord)) {
-                userScore++;
+                userScore = userScore + WordScore.Score(randomWord);
             }
             System.out.println("Your score is: " + userScore);
             clearScreen();
