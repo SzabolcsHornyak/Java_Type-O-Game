@@ -22,8 +22,6 @@ public class NewGame {
 
         System.out.println("New");
 
-
-
         for (int i = 0; i < testWords.size(); i++) {
 
             int randomNumber = (int) (Math.random() * testWords.size());
@@ -44,4 +42,5 @@ public class NewGame {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
+
 }
