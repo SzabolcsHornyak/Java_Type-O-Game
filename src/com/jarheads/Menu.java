@@ -14,7 +14,7 @@ public class Menu {
             choice = input.next();
             switch (choice) {
                 case "1": NewGame.new_game(); break;
-                case "2": HighScore.highscore(); break;
+                //case "2": HighScore.highscore(); break;
                 case "9": exit(); break;
                 default: System.out.println("Wrong choice");
             }

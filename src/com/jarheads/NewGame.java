@@ -7,29 +7,25 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class NewGame {
-    public static void new_game() {
+    public static void new_game(JSONArray words) {
         // same thing but instead of exit, break the while loop
 
-        JSONArray words = JSONReader.getWordList();
 
         Scanner userInput = new Scanner(System.in);
         String randomWord;
         Integer userScore = 0;
 
-        Thread timerThread = new Thread(new Timer());
-        timerThread.start();
 
-        while(Timer.counter > 0) {
+        for (int i = 0; i < words.size(); i++) {
 
             int randomNumber = (int) (Math.random() * words.size());
             randomWord = words.get(randomNumber).toString();
-            System.out.println(randomWord + "   " + Timer.counter + " seconds remaining");
+            Visual.screen("Type-O-game",randomWord,userScore.toString(),"1 min");
             words.remove(randomNumber);
             String enteredWord = userInput.next();
             if (enteredWord.equals(randomWord)) {
                 userScore = userScore + WordScore.Score(randomWord);
             }
-            System.out.println("Your score is: " + userScore);
             clearScreen();
         }
 
