@@ -12,7 +12,7 @@ public class JSONReader {
         JSONArray words = new JSONArray();
         JSONParser parser = new JSONParser();
         try {
-            Object object = parser.parse(new FileReader(System.getProperty("user.dir") + "/wordlist.json"));
+        Object object = parser.parse(new FileReader(System.getProperty("user.dir") + "/wordlist.json"));
 
             //convert Object to JSONObject
             JSONObject jsonObject = (JSONObject) object;

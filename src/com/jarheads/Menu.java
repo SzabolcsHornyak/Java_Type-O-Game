@@ -8,13 +8,12 @@ public class Menu {
         Scanner input = new Scanner(System.in);
         String choice;
 
-        JSONArray words = JSONReader.getWordList();
 
         while (true) {
             printMainMenu();
             choice = input.next();
             switch (choice) {
-                case "1": NewGame.new_game(words); break;
+                case "1": NewGame.new_game(); break;
                 case "2": HighScore.highscore(); break;
                 case "9": exit(); break;
                 default: System.out.println("Wrong choice");

@@ -7,9 +7,10 @@ import java.util.LinkedList;
 import java.util.Random;
 
 public class NewGame {
-    public static void new_game(JSONArray words) {
+    public static void new_game() {
         // same thing but instead of exit, break the while loop
 
+        JSONArray words = JSONReader.getWordList();
 
         Scanner userInput = new Scanner(System.in);
         String randomWord;
