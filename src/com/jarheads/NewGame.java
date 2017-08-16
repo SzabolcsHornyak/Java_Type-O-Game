@@ -15,12 +15,13 @@ public class NewGame {
         String randomWord;
         Integer userScore = 0;
 
+        Thread timerThread = new Thread(new Timer());
+        timerThread.start();
 
-        for (int i = 0; i < words.size(); i++) {
-
+        while(Timer.counter > 0) {
             int randomNumber = (int) (Math.random() * words.size());
             randomWord = words.get(randomNumber).toString();
-            Visual.screen("Type-O-game",randomWord,userScore.toString(),"1 min");
+            Visual.screen("Type-O-game",randomWord,userScore.toString(),Integer.toString(Timer.counter));
             words.remove(randomNumber);
             String enteredWord = userInput.next();
             if (enteredWord.equals(randomWord)) {
