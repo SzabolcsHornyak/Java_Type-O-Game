@@ -16,12 +16,14 @@ public class NewGame {
         String randomWord;
         Integer userScore = 0;
 
+        Thread timerThread = new Thread(new Timer());
+        timerThread.start();
 
-        for (int i = 0; i < words.size(); i++) {
+        while(Timer.counter > 0) {
 
             int randomNumber = (int) (Math.random() * words.size());
             randomWord = words.get(randomNumber).toString();
-            System.out.println(randomWord);
+            System.out.println(randomWord + "   " + Timer.counter + " seconds remaining");
             words.remove(randomNumber);
             String enteredWord = userInput.next();
             if (enteredWord.equals(randomWord)) {
