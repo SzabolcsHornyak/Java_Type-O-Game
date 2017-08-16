@@ -20,13 +20,12 @@ public class NewGame {
 
             int randomNumber = (int) (Math.random() * words.size());
             randomWord = words.get(randomNumber).toString();
-            System.out.println(randomWord);
+            Visual.screen("Type-O-game",randomWord,userScore.toString(),"1 min");
             words.remove(randomNumber);
             String enteredWord = userInput.next();
             if (enteredWord.equals(randomWord)) {
                 userScore = userScore + WordScore.Score(randomWord);
             }
-            System.out.println("Your score is: " + userScore);
             clearScreen();
         }
 
