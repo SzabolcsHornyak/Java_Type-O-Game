@@ -83,8 +83,7 @@ public class HighScore {
         newScorePairs.add(Integer.toString(score));
         scoreList.add(newScorePairs);
 
-        scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
-        Collections.reverse(scoreList);
+        scoreList = sortScoreDesc(scoreList);
 
         JSONObject newHighscores = new JSONObject();
         for (int i = 0; i < 10; i++) {
