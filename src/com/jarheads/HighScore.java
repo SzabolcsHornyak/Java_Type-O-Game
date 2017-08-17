@@ -33,8 +33,8 @@ public class HighScore {
         }
 
         return jsonObject;
-
     }
+
 
     public static List getHighscorelist(){
         JSONObject jsonObject = readHighscores();
@@ -52,42 +52,28 @@ public class HighScore {
         return scoreList;
     }
 
+
+    public static List sortScoreDesc(List<ArrayList<String>> scoreList){
+        scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
+        Collections.reverse(scoreList);
+        return scoreList;
+    }
+
+
     public static void printHighscores() {
         List<ArrayList<String>> scoreList = getHighscorelist();
 
-        scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
-        Collections.reverse(scoreList);
+        scoreList = sortScoreDesc(scoreList);
 
         for (List result : scoreList) {
             System.out.print(result.get(0) + ": ");
             System.out.println(result.get(1));
         }
-        Scanner input = new Scanner(System.in);
-        String choice;
-
-        while (true) {
-            System.out.println("Choose an option");
-            System.out.println("================");
-            System.out.println("1 - New Game");
-            System.out.println("2 - Back to main menu");
-            System.out.println("----------------");
-            System.out.println("9 - Exit");
-            choice = input.next();
-            switch (choice) {
-                case "1":
-                    NewGame.new_game(JSONReader.getWordList());
-                    break;
-                case "2":
-                    Menu.mainmenu();
-                    break;
-                case "9":
-                    Menu.exit();
-                    break;
-                default:
-                    System.out.println("Wrong choice");
-            }
-        }
+        System.out.println("\n");
+        Menu.promptEnterKey();
+        Menu.mainmenu();
     }
+
 
     public static void saveHighscores(String name, int score) {
         List<ArrayList<String>> scoreList = getHighscorelist();
@@ -107,11 +93,8 @@ public class HighScore {
 
         try (FileWriter file = new FileWriter(System.getProperty("user.dir") + "/highscores.json")) {
             file.write(newHighscores.toJSONString());
-            System.out.println("Successfully Copied JSON Object to File...");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-
-
