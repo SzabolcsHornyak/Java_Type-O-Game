@@ -3,7 +3,6 @@ package com.jarheads;
 import java.io.FileWriter;
 import java.util.*;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -37,7 +36,7 @@ public class HighScore {
 
     }
 
-    public static void printHighscores() {
+    public static List getHighscorelist(){
         JSONObject jsonObject = readHighscores();
         Iterator<String> objectKeys = jsonObject.keySet().iterator();
 
@@ -50,6 +49,11 @@ public class HighScore {
             scorePairs.add(jsonObject.get(key).toString());
             scoreList.add(scorePairs);
         }
+        return scoreList;
+    }
+
+    public static void printHighscores() {
+        List<ArrayList<String>> scoreList = getHighscorelist();
 
         scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
         Collections.reverse(scoreList);
@@ -86,18 +90,7 @@ public class HighScore {
     }
 
     public static void saveHighscores(String name, int score) {
-        JSONObject jsonObject = readHighscores();
-        Iterator<String> objectKeys = jsonObject.keySet().iterator();
-
-        List<ArrayList<String>> scoreList = new ArrayList<>();
-
-        while (objectKeys.hasNext()) {
-            ArrayList<String> scorePairs = new ArrayList<>();
-            String key = objectKeys.next();
-            scorePairs.add(key);
-            scorePairs.add(jsonObject.get(key).toString());
-            scoreList.add(scorePairs);
-        }
+        List<ArrayList<String>> scoreList = getHighscorelist();
 
         ArrayList<String> newScorePairs = new ArrayList<>();
         newScorePairs.add(name);
