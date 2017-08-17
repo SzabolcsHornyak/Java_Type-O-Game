@@ -61,13 +61,18 @@ public class HighScore {
 
 
     public static void printHighscores() {
+        Visual.clearScreen();
         List<ArrayList<String>> scoreList = getHighscorelist();
 
         scoreList = sortScoreDesc(scoreList);
 
+        System.out.println(Visual.ANSI_RED + "High score");
+        System.out.println(Visual.ANSI_WHITE + Visual.AddChar("-=",15) + "-\n");
+        int rank = 1;
         for (List result : scoreList) {
-            System.out.print(result.get(0) + ": ");
-            System.out.println(result.get(1));
+            System.out.print(Visual.ANSI_RED + rank + ".\t" + Visual.ANSI_WHITE  + result.get(0) + ":\t");
+            System.out.println(Visual.ANSI_GREEN + result.get(1));
+            rank++;
         }
         System.out.println("\n");
         Menu.promptEnterKey();
