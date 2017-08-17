@@ -26,19 +26,15 @@ public class Menu {
         System.exit(1);
     }
 
-    public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
-        System.out.flush();
-    }
-
     public static void printMainMenu(){
-        clearScreen();
-        System.out.println("Choose an option");
-        System.out.println("================");
-        System.out.println("1 - New Game");
-        System.out.println("2 - Highscore");
-        System.out.println("----------------");
-        System.out.println("9 - Exit");
+        Visual.clearScreen();
+        System.out.println(Visual.ANSI_RED + "Type-O-Game" + Visual.NEW_LINE);
+        System.out.println(Visual.ANSI_PURPLE + "Choose an option");
+        System.out.println(Visual.ANSI_WHITE + Visual.AddChar("-=",7) + "-");
+        System.out.println(Visual.ANSI_GREEN + "1" + Visual.ANSI_WHITE + " - " + Visual.ANSI_YELLOW + "New Game");
+        System.out.println(Visual.ANSI_GREEN + "2" + Visual.ANSI_WHITE + " - " + Visual.ANSI_YELLOW + "Highscore");
+        System.out.println(Visual.ANSI_WHITE + Visual.AddChar("-+", 7) + "-");
+        System.out.println(Visual.ANSI_GREEN + "9" + Visual.ANSI_WHITE + " - " + Visual.ANSI_YELLOW + "Exit");
 
     }
 }
