@@ -3,7 +3,6 @@ package com.jarheads;
 import java.io.FileWriter;
 import java.util.*;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -34,32 +33,10 @@ public class HighScore {
         }
 
         return jsonObject;
-
     }
 
-    public static void printHighscores(JSONObject jsonObject) {
-        Iterator<String> objectKeys = jsonObject.keySet().iterator();
 
-        List<ArrayList<String>> scoreList = new ArrayList<>();
-
-        while (objectKeys.hasNext()) {
-            ArrayList<String> scorePairs = new ArrayList<>();
-            String key = objectKeys.next();
-            scorePairs.add(key);
-            scorePairs.add(jsonObject.get(key).toString());
-            scoreList.add(scorePairs);
-        }
-
-        scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
-        Collections.reverse(scoreList);
-
-        for (List result : scoreList) {
-            System.out.print(result.get(0) + ": ");
-            System.out.println(result.get(1));
-        }
-    }
-
-    public static void saveHighscores(String name, int score) {
+    public static List getHighscorelist(){
         JSONObject jsonObject = readHighscores();
         Iterator<String> objectKeys = jsonObject.keySet().iterator();
 
@@ -72,14 +49,41 @@ public class HighScore {
             scorePairs.add(jsonObject.get(key).toString());
             scoreList.add(scorePairs);
         }
+        return scoreList;
+    }
+
+
+    public static List sortScoreDesc(List<ArrayList<String>> scoreList){
+        scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
+        Collections.reverse(scoreList);
+        return scoreList;
+    }
+
+
+    public static void printHighscores() {
+        List<ArrayList<String>> scoreList = getHighscorelist();
+
+        scoreList = sortScoreDesc(scoreList);
+
+        for (List result : scoreList) {
+            System.out.print(result.get(0) + ": ");
+            System.out.println(result.get(1));
+        }
+        System.out.println("\n");
+        Menu.promptEnterKey();
+        Menu.mainmenu();
+    }
+
+
+    public static void saveHighscores(String name, int score) {
+        List<ArrayList<String>> scoreList = getHighscorelist();
 
         ArrayList<String> newScorePairs = new ArrayList<>();
         newScorePairs.add(name);
         newScorePairs.add(Integer.toString(score));
         scoreList.add(newScorePairs);
 
-        scoreList.sort((p1, p2) -> (new Integer(p1.get(1)).compareTo(new Integer(p2.get(1)))));
-        Collections.reverse(scoreList);
+        scoreList = sortScoreDesc(scoreList);
 
         JSONObject newHighscores = new JSONObject();
         for (int i = 0; i < 10; i++) {
@@ -88,11 +92,8 @@ public class HighScore {
 
         try (FileWriter file = new FileWriter(System.getProperty("user.dir") + "/highscores.json")) {
             file.write(newHighscores.toJSONString());
-            System.out.println("Successfully Copied JSON Object to File...");
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 }
-
-

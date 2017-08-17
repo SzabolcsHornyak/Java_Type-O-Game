@@ -14,7 +14,7 @@ public class Menu {
             choice = input.next();
             switch (choice) {
                 case "1": NewGame.new_game(JSONReader.getWordList()); break;
-                //case "2": HighScore.highscore(); break;
+                case "2": HighScore.printHighscores(); break;
                 case "9": exit(); break;
                 default: System.out.println("Wrong choice");
             }
@@ -37,4 +37,12 @@ public class Menu {
         System.out.println(Visual.ANSI_GREEN + "9" + Visual.ANSI_WHITE + " - " + Visual.ANSI_YELLOW + "Exit");
 
     }
+
+    public static void promptEnterKey(){
+        System.out.println("Press \"ENTER\" to continue...");
+        Scanner scanner = new Scanner(System.in);
+        scanner.nextLine();
+    }
+
+
 }
