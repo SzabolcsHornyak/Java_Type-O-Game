@@ -16,6 +16,7 @@ public class NewGame {
         Integer userScore = 0;
 
         Thread timerThread = new Thread(new Timer());
+        Timer.counter = 60;
         timerThread.start();
 
         while(Timer.counter > 0) {
@@ -29,7 +30,8 @@ public class NewGame {
             }
             clearScreen();
         }
-
+        clearScreen();
+        GameOver.gameOver(userScore);
     }
     //So this doesn't work yet
     public static void clearScreen() {
