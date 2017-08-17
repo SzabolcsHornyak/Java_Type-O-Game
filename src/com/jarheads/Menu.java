@@ -14,7 +14,7 @@ public class Menu {
             choice = input.next();
             switch (choice) {
                 case "1": NewGame.new_game(JSONReader.getWordList()); break;
-                //case "2": HighScore.highscore(); break;
+                case "2": HighScore.printHighscores(); break;
                 case "9": exit(); break;
                 default: System.out.println("Wrong choice");
             }

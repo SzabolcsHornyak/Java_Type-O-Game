@@ -37,7 +37,8 @@ public class HighScore {
 
     }
 
-    public static void printHighscores(JSONObject jsonObject) {
+    public static void printHighscores() {
+        JSONObject jsonObject = readHighscores();
         Iterator<String> objectKeys = jsonObject.keySet().iterator();
 
         List<ArrayList<String>> scoreList = new ArrayList<>();
@@ -56,6 +57,31 @@ public class HighScore {
         for (List result : scoreList) {
             System.out.print(result.get(0) + ": ");
             System.out.println(result.get(1));
+        }
+        Scanner input = new Scanner(System.in);
+        String choice;
+
+        while (true) {
+            System.out.println("Choose an option");
+            System.out.println("================");
+            System.out.println("1 - New Game");
+            System.out.println("2 - Back to main menu");
+            System.out.println("----------------");
+            System.out.println("9 - Exit");
+            choice = input.next();
+            switch (choice) {
+                case "1":
+                    NewGame.new_game(JSONReader.getWordList());
+                    break;
+                case "2":
+                    Menu.mainmenu();
+                    break;
+                case "9":
+                    Menu.exit();
+                    break;
+                default:
+                    System.out.println("Wrong choice");
+            }
         }
     }
 
