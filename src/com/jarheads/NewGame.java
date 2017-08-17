@@ -29,7 +29,8 @@ public class NewGame {
             }
             clearScreen();
         }
-
+        clearScreen();
+        GameOver.gameOver(userScore);
     }
     //So this doesn't work yet
     public static void clearScreen() {
